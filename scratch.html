@@ -50,6 +50,89 @@
 
 	// starting my 30 minutes for 11-20
 
-	
+	var returnUndefined = function() {
+		return;
+	}
+	console.log("just doing \"return\" in a function gives a value of: " + returnUndefined());
+
+	var recursiveFunctions = function() {
+
+		var message = function() {
+			return "inside other functions";
+		}
+		console.log("functions can be declared", message());
+	}
+	recursiveFunctions();
+
+	console.log("throwing braces doesn't create scope!");
+	var x = "test";
+	{
+		var x = "bleh";
+	}
+	console.log(x);
+
+	console.log("seems like \'let\' isn't a thing.. hmm..");
+
+	console.log("we can change the function that variables point to like other variables");
+	var bomb = function() {
+		return "boom";
+	}
+	console.log(bomb());
+	bomb = function() {
+		return "meh";
+	}
+	console.log(bomb());
+
+	console.log("trying to call a function that was declared via 'var steve = function()'", 
+				"will give problems if the declaration is below the call. this is obvious.",
+				"but we can do function steve() {} and call it from wherever");
+
+	function chicken() {
+		return egg();
+	}
+	function egg() {
+		return chicken();
+	}
+
+	if (prompt("wanna blow the stack up?") == "yes") {
+		chicken();
+	}
+
+	console.log("blowing up stack results in 'uncaught rangeerror: maximum call stack size exceeded'");
+
+	function craziness(arg1, arg2) {
+		if (arg1 == undefined) {
+			console.log("called with no args");
+		}
+		else if (arg2 == undefined) {
+			console.log("called with one args");
+		}
+		else {
+			console.log("called with at least two args!");
+		}
+	}
+
+	craziness();
+	craziness('ndf');
+	craziness('jdksnfjf', 'jksdnfsd');
+	craziness('jdksnfjf', 'jksdnfsd', 3);
+
+	console.log("ok this part is pretty wild, check the source for this:");
+
+	function rememberMe(name) {
+		return function(greeting) {
+			console.log(greeting + name);
+		}
+	}
+
+	var steve = rememberMe("steve");
+	steve("sup");
+	steve("yo");
+	var sue = rememberMe("sue");
+	sue("hey");
+
+	console.log("this is closure, and I should probably read more on it, seems like a big subject");
+
+
 	</script
 </body>
