@@ -176,7 +176,61 @@
 	console.log("test 1:", countChar("BBC", "b"));
 	console.log("test 2:", countChar("kakkerlak", "k"));
 
-	
+	// chapter four exercises:
+	function range(start, end, step) {
+		var ans = [];
+		for (var i = start; i != end; i += step) {
+			ans.push(i);
+		}
+		ans.push(end);
+		return ans;
+	}
+
+	function sum(arrayNumbers) {
+		var ans = 0;
+		for (var i = arrayNumbers.length - 1; i >= 0; i--) {
+			ans += arrayNumbers[i];
+		}
+		return ans;
+	}
+
+	console.log("sum(range(5,2,-1)) = ", sum(range(5,2,-1)));
+
+	function reverseArray(array) {
+		var ans = [];
+		for (var i = array.length - 1; i >= 0; i--) {
+			ans.push(array[i]);
+		}
+		return ans;
+	}
+
+	function reverseArrayInPlace(array) {
+		var temp;
+		for (var i = 0; i < array.length / 2; i++) {
+			temp = array[i];
+			array[i] = array[array.length - i - 1];
+			array[array.length - i - 1] = temp;
+		}
+	}
+
+	console.log(reverseArray(["A", "B", "C"]));
+	var arrayValue = [1, 2, 3, 4, 5, 6];
+	reverseArrayInPlace(arrayValue);
+	console.log(arrayValue);
+
+	function arrayToList(array) {
+		if (array.length == 0) {
+			return null;
+		}
+		var ans = {
+			value: array[0],
+			rest: arrayToList(array.slice(1))
+		};
+		return ans;
+	}
+
+	console.log(arrayToList([10,20]));
+
 
 
 	</script
