@@ -1,0 +1,5 @@
+c:\users\zsadler\documents\visual studio 2010\Projects\Shakespeare\Shakespeare\bin\Debug\Shakespeare.exe
+c:\users\zsadler\documents\visual studio 2010\Projects\Shakespeare\Shakespeare\bin\Debug\Shakespeare.pdb
+c:\users\zsadler\documents\visual studio 2010\Projects\Shakespeare\Shakespeare\obj\x86\Debug\Shakespeare.exe
+c:\users\zsadler\documents\visual studio 2010\Projects\Shakespeare\Shakespeare\obj\x86\Debug\Shakespeare.pdb
+C:\Users\zsadler\Documents\Visual Studio 2010\Projects\Shakespeare\Shakespeare\obj\x86\Debug\Shakespeare.csprojResolveAssemblyReference.cache
