@@ -6,21 +6,32 @@ function Setup() {
 	var fileInput = document.getElementById('fileInput');
 
 	fileInput.addEventListener('change', FileSelected);
+	
+	var ExplanationText = "Either select a local txt file to use or choose from one of the source texts below, then generate as many words as you want!";
+
+	FadeInEffect(ExplanationText, 0, 20);
+}
+
+function ReadUrl() {
+	url = $('#urlInput').val();
+	if (url == null || url == "") {
+		$('#generated-text').html("No valid txt file found at that URL, try again");		
+		return;
+	}
+	ReadLocal(url);
 }
 
 function ReadLocal(whichFile) {
-	var xhr = new XMLHttpRequest();
-	xhr.open("GET", whichFile, true);
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
-			ReadSourceFile(null, xhr.responseText);
-		}
-	}
-	xhr.send();
+	$('#generated-text').html("Loading dictionary...");
+	
+	$.get(whichFile, function(data) {
+		ReadSourceFile(null, data);
+	});
 }
 
 function FileSelected(e) 
 {
+	$('#generated-text').html("Loading dictionary...");
     var file = fileInput.files[0];
 
 	if (file.type.match('text/plain')) {
@@ -28,6 +39,9 @@ function FileSelected(e)
 
 		reader.onload = ReadSourceFile;
 		reader.readAsText(file);
+	}
+	else {
+		$('#generated-text').html("Sorry, that wasn't a .txt file so it can't be used");
 	}
 }
 
@@ -51,13 +65,19 @@ function ReadSourceFile(e, local) {
 		}
 	}
 	DictionaryCreated = true;
-	document.getElementById('generated-text').innerHTML = "Dictionary loaded, go ahead and generate 100 words!";
+	$('#generated-text').html("Dictionary loaded, start generating some output!");
 }
 
-function GenerateWords(numWords) {
+function GenerateWords() {
 	if (!DictionaryCreated) {
-		document.getElementById('generated-text').innerHTML = "Generate the dictionary first!";
+		$('#generated-text').html("Generate the dictionary first!");
 		return;
+	}
+
+	var numWords = Number($('input#numWords').val());
+
+	if (typeof numWords != "number" || numWords < 1) {
+		numWords = 100;
 	}
 
 	var Answer = "";
@@ -92,16 +112,16 @@ function GenerateWords(numWords) {
 			Answer += " " + curr;
 	}
 
-	FadeInEffect(Answer, 0);
+	FadeInEffect(Answer, 0, 10);
 }
 
-function FadeInEffect(srcText, charsPrinted) {
+function FadeInEffect(srcText, charsPrinted, delay) {
 	if (charsPrinted < srcText.length) {
-		document.getElementById('generated-text').innerHTML = srcText.substring(0, charsPrinted + 1);
+		$('#generated-text').html(srcText.substring(0, charsPrinted + 1));
 		charsPrinted++;
 		setTimeout(function() {
-			FadeInEffect(srcText, charsPrinted)
-		}, 10);
+			FadeInEffect(srcText, charsPrinted, delay)
+		}, delay);
 	}
 }
 

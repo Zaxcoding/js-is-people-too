@@ -5,16 +5,22 @@
 
 	<body>
 		<div id="wrapper">
-			<p id="generated-text">Text will go here once generated.</p>
+			<p id="generated-text"></p>
 		</div>
 		<div id="buttons">
 			<input type="file" id="fileInput" value="Select Dictionary File">
-			<input type="button" onclick="GenerateWords(100)" value="Generate 100 words!">
+			<input type="number" id="numWords" placeholder="100" min="1" max="5000" step="1" value ="100">
+			<input type="button" onclick="GenerateWords()" value="Generate words!">
 			<p></p>
-			<input type="button" onclick="ReadLocal('pg10.txt')" value="The Bible">
-			<input type="button" onclick="ReadLocal('pg100.txt')" value="Shakespeare">
-			<input type="button" onclick="ReadLocal('pg11.txt')" value="Alice in Wonderland">
+			<input type="button" onclick="ReadUrl('pg10.txt')" value="The Bible">
+			<input type="button" onclick="ReadUrl('pg100.txt')" value="Shakespeare">
+			<input type="button" onclick="ReadUrl('pg11.txt')" value="Alice in Wonderland">
+			<p></p>
+			<input id="urlInput" type="url" placeholder="Enter the URL for a remote txt file">
+			<input id="urlSubmit" type="submit" onclick="ReadUrl()" value="Use URL">
 		</div>
+		<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 		<script src="shakespeare.js"></script>
 	</body>
 </html>
