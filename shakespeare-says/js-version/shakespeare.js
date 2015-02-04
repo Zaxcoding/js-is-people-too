@@ -1,5 +1,3 @@
-var FullFileText;
-
 var Dictionary = [];
 var DictionaryCreated = false;
 var IndexToString = [];
@@ -34,6 +32,7 @@ function FileSelected(e)
 }
 
 function ReadSourceFile(e, local) {
+	Dictionary = [];
 	var wordArray;
 	if (e != null)
 		wordArray = e.target.result.toLowerCase().match(/\S+/g);
@@ -66,9 +65,7 @@ function GenerateWords(numWords) {
 	var curr = IndexToString[currIndex];
 	Answer += curr[0].toUpperCase() + curr.substring(1);
 
-	var SecondIndex;
-
-	var Capitalize
+	var Capitalize;
 
 	for (var i = 0; i < numWords; i++) {
 		Capitalize = false;
