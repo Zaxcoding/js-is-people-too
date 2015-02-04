@@ -10,6 +10,17 @@ function Setup() {
 	fileInput.addEventListener('change', FileSelected);
 }
 
+function ReadLocal(whichFile) {
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", whichFile, true);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			ReadSourceFile(null, xhr.responseText);
+		}
+	}
+	xhr.send();
+}
+
 function FileSelected(e) 
 {
     var file = fileInput.files[0];
@@ -22,8 +33,12 @@ function FileSelected(e)
 	}
 }
 
-function ReadSourceFile(e) {
-	var wordArray = e.target.result.toLowerCase().match(/\S+/g);
+function ReadSourceFile(e, local) {
+	var wordArray;
+	if (e != null)
+		wordArray = e.target.result.toLowerCase().match(/\S+/g);
+	else if (local != null)
+		wordArray = local.toLowerCase().match(/\S+/g);
 	for (var i = 0; i < wordArray.length; i++) {
 		var word = wordArray[i];
 
@@ -37,6 +52,7 @@ function ReadSourceFile(e) {
 		}
 	}
 	DictionaryCreated = true;
+	document.getElementById('generated-text').innerHTML = "Dictionary loaded, go ahead and generate 100 words!";
 }
 
 function GenerateWords(numWords) {
@@ -72,14 +88,11 @@ function GenerateWords(numWords) {
 			currIndex = Math.floor(Math.random()*Dictionary.length);
 			curr = IndexToString[currIndex];
 		}
-		
+
 		if (Capitalize || curr == "i")		
 			Answer += " " + curr[0].toUpperCase() + curr.substring(1);
 		else
 			Answer += " " + curr;
-		if (Answer.indexOf("undefined") > -1) {
-			debugger;
-		}
 	}
 
 	FadeInEffect(Answer, 0);
