@@ -48,12 +48,14 @@ function GenerateWords(numWords) {
 	var Answer = "";
 	var currIndex = Math.floor(Math.random()*Dictionary.length);
 	var curr = IndexToString[currIndex];
-	Answer += curr;
+	Answer += curr[0].toUpperCase() + curr.substring(1);
 
 	var SecondIndex;
 
+	var Capitalize
 
 	for (var i = 0; i < numWords; i++) {
+		Capitalize = false;
 		while (!curr) {
 			currIndex = Math.floor(Math.random()*Dictionary.length);
 			curr = IndexToString[currIndex];
@@ -61,8 +63,23 @@ function GenerateWords(numWords) {
 
 		currIndex = Math.floor(Math.random()*Dictionary[curr].length);
 
+		if (curr.indexOf(".") > -1 || curr.indexOf("!") > -1 || curr.indexOf("?") > -1)
+			Capitalize = true; 
+
 		curr = Dictionary[curr][currIndex];
-		Answer += " " + curr;
+		
+		while (!curr) {
+			currIndex = Math.floor(Math.random()*Dictionary.length);
+			curr = IndexToString[currIndex];
+		}
+		
+		if (Capitalize || curr == "i")		
+			Answer += " " + curr[0].toUpperCase() + curr.substring(1);
+		else
+			Answer += " " + curr;
+		if (Answer.indexOf("undefined") > -1) {
+			debugger;
+		}
 	}
 
 	FadeInEffect(Answer, 0);
