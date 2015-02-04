@@ -12,15 +12,6 @@ function Setup() {
 	FadeInEffect(ExplanationText, 0, 20);
 }
 
-function ReadUrl() {
-	url = $('#urlInput').val();
-	if (url == null || url == "") {
-		$('#generated-text').html("No valid txt file found at that URL, try again");		
-		return;
-	}
-	ReadLocal(url);
-}
-
 function ReadLocal(whichFile) {
 	$('#generated-text').html("Loading dictionary...");
 	
@@ -87,7 +78,7 @@ function GenerateWords() {
 
 	var Capitalize;
 
-	for (var i = 0; i < numWords; i++) {
+	for (var i = 0; i < numWords - 1; i++) {
 		Capitalize = false;
 		while (!curr) {
 			currIndex = Math.floor(Math.random()*Dictionary.length);
