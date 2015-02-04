@@ -1,0 +1,8 @@
+@font-face {
+    font-family: shakespeare;
+    src: url(HamletOrNot.ttf);
+}
+#generated-text {
+	font-family: shakespeare;
+	font-weight: normal;
+}
