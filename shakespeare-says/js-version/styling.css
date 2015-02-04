@@ -2,7 +2,24 @@
     font-family: shakespeare;
     src: url(HamletOrNot.ttf);
 }
-#generated-text {
+p#generated-text {
 	font-family: shakespeare;
 	font-weight: normal;
+	font-size: 36px;
+	text-align: left;
+	padding-top: 100px;
+}
+div#wrapper {
+	padding-left: 15%;
+	padding-right: 15%;
+	width: 75%;
+}
+input {
+	font-size: 24px;
+	font-family: helvetica, sans-serif;
+	border-radius: 20;
+}
+div#buttons {
+	padding-top: 100px;
+	text-align: center;
 }

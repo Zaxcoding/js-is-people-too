@@ -4,9 +4,13 @@
 	</head>
 
 	<body>
-		<p id = 'generated-text'>Text will go here once generated.</p>
-		<input type="file" id="fileInput" value="Select Dictionary File">
-		<input type="button" onclick="GenerateWords(100)" value="Generate 100 words!">
+		<div id="wrapper">
+			<p id="generated-text">Text will go here once generated.</p>
+		</div>
+		<div id="buttons">
+			<input type="file" id="fileInput" value="Select Dictionary File">
+			<input type="button" onclick="GenerateWords(100)" value="Generate 100 words!">
+		</div>
 		<script src="shakespeare.js"></script>
 	</body>
 </html>
