@@ -43,23 +43,33 @@ function ReadSourceFile(e, local) {
 		wordArray = e.target.result.toLowerCase().match(/\S+/g);
 	else if (local != null)
 		wordArray = local.toLowerCase().match(/\S+/g);
-	for (var i = 0; i < wordArray.length; i++) {
-		var word = wordArray[i];
 
-		if (Dictionary[word] === undefined) {
-			Dictionary[word] = [];
-			IndexToString[IndexToString.length] = word;
+	GenerateDictionary(wordArray, 2);
+}
+
+function GenerateDictionary(wordArray, phraseLength) {
+	var words = [];
+	for (var i = 0; i < wordArray.length - phraseLength + 1; i += phraseLength) {
+		for (var j = 0; j < phraseLength; j++) {
+			words[j] = wordArray[i + j];
 		}
-		if(wordArray[i+1]) {
-			var word2 = wordArray[i+1];
-			Dictionary[word][Dictionary[word].length] = word2;
+
+		if (Dictionary[words[0]] === undefined) {
+			Dictionary[words[0]] = [];
+			IndexToString[IndexToString.length] = words[0];
+		}
+
+		if (words[phraseLength - 1]) {
+			Dictionary[words[0]][Dictionary[words[0]].length] = words.slice(1).join(" ");
 		}
 	}
 	DictionaryCreated = true;
 	$('#generated-text').html("Dictionary loaded, start generating some output!");
 }
 
-function GenerateWords() {
+function GenerateWords(phraseLength) {
+	phraseLength = phraseLength - 1;
+
 	if (!DictionaryCreated) {
 		$('#generated-text').html("Generate the dictionary first!");
 		return;
@@ -80,7 +90,7 @@ function GenerateWords() {
 
 	for (var i = 0; i < numWords - 1; i++) {
 		Capitalize = false;
-		while (!curr) {
+		while (!curr || Dictionary[curr] == undefined) {
 			currIndex = Math.floor(Math.random()*Dictionary.length);
 			curr = IndexToString[currIndex];
 		}
@@ -97,10 +107,13 @@ function GenerateWords() {
 			curr = IndexToString[currIndex];
 		}
 
+		
 		if (Capitalize || curr == "i")		
 			Answer += " " + curr[0].toUpperCase() + curr.substring(1);
 		else
-			Answer += " " + curr;
+			Answer += " " + curr;	
+
+		curr = curr.split(' ')[phraseLength - 1];
 	}
 
 	FadeInEffect(Answer, 0, 10);
