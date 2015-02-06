@@ -44,7 +44,7 @@ function ReadSourceFile(e, local) {
 	else if (local != null)
 		wordArray = local.toLowerCase().match(/\S+/g);
 
-	GenerateDictionary(wordArray, 2);
+	GenerateDictionary(wordArray, 3);
 }
 
 function GenerateDictionary(wordArray, phraseLength) {
@@ -88,7 +88,7 @@ function GenerateWords(phraseLength) {
 
 	var Capitalize;
 
-	for (var i = 0; i < numWords - 1; i++) {
+	for (var i = 0; i < (numWords - 1)/(phraseLength); i++) {
 		Capitalize = false;
 		while (!curr || Dictionary[curr] == undefined) {
 			currIndex = Math.floor(Math.random()*Dictionary.length);
